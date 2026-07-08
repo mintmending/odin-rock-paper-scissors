@@ -16,3 +16,17 @@ function getComputerChoice(){
 }
 
 getComputerChoice();
+
+/* 
+create function named getHumanChoice
+INIT string variable called choice
+GET input and assign to choice variable
+return choice
+ */
+
+function getHumanChoice(){
+    let choice = prompt("Enter your choice:");
+    return choice;
+}
+
+getHumanChoice();
