@@ -27,9 +27,6 @@ function getHumanChoice(){
     return choice;
 }
 
-// player score variable
-let humanScore = 0;
-let computerScore = 0;
 
 // single round logic
 /* 
@@ -45,24 +42,53 @@ ENDIF
 */
 
 function playRound(humanChoice, computerChoice) {
+    let winner = "draw";
     humanChoice = humanChoice.toLowerCase();
     if((humanChoice === "rock" && computerChoice === "scissors") ||
         (humanChoice === "scissors" && computerChoice === "paper") ||
         (humanChoice === "paper" && computerChoice === "rock")
     ){
         console.log(`You win! ${humanChoice} beats ${computerChoice}.`);
-        humanScore++;
+        winner = "human";
     } else if (humanChoice === computerChoice){
         console.log(`Draw. You both picked ${humanChoice}.`);
+        winner = "draw";
     } else {
         console.log(`You lose! ${computerChoice} beats ${humanChoice}.`);
-        computerScore++;
+        winner = "computer";
     }
 
+    return winner;
+}
+
+
+
+// entire game logic
+/* 
+    create function playGame() that plays 5 rounds
+*/
+
+function playGame() {
+
+    let humanScore = 0;
+    let computerScore = 0;
+    let winner = "draw";
+
+    for(let round = 1; round <= 5; round++){
+        const humanSelection = getHumanChoice();
+        const computerSelection = getComputerChoice();
+
+        winner = playRound(humanSelection, computerSelection);
+        if(winner === "human"){
+            humanScore++;
+        } else if(winner === "computer"){
+            computerScore++;
+        }
+    }
+
+    console.log(`Human Score: ${humanScore}, Computer Score: ${computerScore}`);
+    
     return;
 }
 
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
-
-playRound(humanSelection, computerSelection);
+playGame();
