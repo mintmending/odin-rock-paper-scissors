@@ -9,13 +9,11 @@ RETURN choice
  */
 
 function getComputerChoice(){
-    let choices = ["rock","paper","scissors"];
+    const choices = ["rock","paper","scissors"];
     let random = Math.floor(Math.random() * 3);
     let choice = choices[random];
     return choice;
 }
-
-getComputerChoice();
 
 /* 
 create function named getHumanChoice
@@ -29,4 +27,42 @@ function getHumanChoice(){
     return choice;
 }
 
-getHumanChoice();
+// player score variable
+let humanScore = 0;
+let computerScore = 0;
+
+// single round logic
+/* 
+create function named playRound with parameters humanChoice and computerChoice
+SET humanChoice to arg humanChoice in all lowercase
+IF humanChoice beats computerChoice THEN
+    LOG "You win! humanChoice beats computerChoice."
+    INCREMENT humanScore
+ELSE
+    LOG "You lose! computerChoice beats humanChoice."
+    INCREMENT computerScore
+ENDIF
+*/
+
+function playRound(humanChoice, computerChoice) {
+    humanChoice = humanChoice.toLowerCase();
+    if((humanChoice === "rock" && computerChoice === "scissors") ||
+        (humanChoice === "scissors" && computerChoice === "paper") ||
+        (humanChoice === "paper" && computerChoice === "rock")
+    ){
+        console.log(`You win! ${humanChoice} beats ${computerChoice}.`);
+        humanScore++;
+    } else if (humanChoice === computerChoice){
+        console.log(`Draw. You both picked ${humanChoice}.`);
+    } else {
+        console.log(`You lose! ${computerChoice} beats ${humanChoice}.`);
+        computerScore++;
+    }
+
+    return;
+}
+
+const humanSelection = getHumanChoice();
+const computerSelection = getComputerChoice();
+
+playRound(humanSelection, computerSelection);
